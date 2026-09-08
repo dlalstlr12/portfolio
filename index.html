@@ -212,22 +212,51 @@ footer a{color:var(--ink-2)}
   @page{margin:14mm 12mm}
   :root{--paper:#fff;--card:#fff;--ink:#000;--ink-2:#333;--ink-3:#666;
     --line:#d5d5d5;--line-2:#ebebeb;--accent:#25436f;--accent-soft:#f2f5fa}
-  body{font-size:10.5pt;line-height:1.6;background:#fff}
+  body{font-size:10.2pt;line-height:1.55;background:#fff;orphans:3;widows:3}
   nav,.no-print{display:none!important}
-  header{padding:0 0 20px}
-  h1{font-size:26pt}
-  .lead{font-size:11pt}
-  section{padding:22px 0;break-inside:auto}
-  .h2-title{font-size:16pt;margin-bottom:16px}
-  h3{font-size:12.5pt;break-after:avoid}
-  h4{break-after:avoid}
-  .card,.stat,.scroller,figure,.note,.pb,.meta,.proj{break-inside:avoid}
-  #projects{break-before:page}
-  .stats{grid-template-columns:repeat(4,1fr)}
   .wrap{max-width:100%;padding:0}
-  a{color:#25436f;text-decoration:none}
-  .contact a{border:1px solid #ccc;padding:4px 10px;font-size:9pt}
+
+  /* 페이지 나눔 — 작은 블록만 통째로 유지한다.
+     큰 블록에 break-inside:avoid 를 걸면 통째로 다음 장으로 밀려 빈 공간이 생긴다. */
+  .card,.stat,figure,.note,.meta,.proj,tr{break-inside:avoid}
+  section,.pb,.scroller,ul,.cards,.stats{break-inside:auto}
+  thead{display:table-header-group}
+  h3,h4{break-after:avoid}
+
+  header{padding:0 0 14px}
+  h1{font-size:23pt;margin-bottom:12px}
+  .lead{font-size:10.5pt;margin-bottom:8px}
+  .contact{margin-top:16px;gap:6px}
+  .contact a{border:1px solid #ccc;padding:3px 9px;font-size:8.5pt}
   .contact .primary{background:#fff;color:#25436f}
+
+  section{padding:16px 0}
+  h2{margin-bottom:4px}
+  .h2-title{font-size:15pt;margin-bottom:12px}
+  h3{font-size:12pt;margin:20px 0 8px}
+  h4{margin:14px 0 6px}
+  p{margin-bottom:9px}
+  ul{margin-bottom:9px}
+  li{margin-bottom:4px}
+
+  .cards{grid-template-columns:repeat(3,1fr);gap:10px}
+  .card{padding:14px}
+  .card p{font-size:9.2pt}
+  .stats{grid-template-columns:repeat(4,1fr);margin:16px 0}
+  .stat{padding:14px 12px}
+  .stat b{font-size:16pt}
+  .pb{margin:22px 0;padding-left:16px}
+  figure{margin:16px 0}
+  figure svg{max-height:225px;width:auto;max-width:100%;margin:0 auto}
+  figcaption{margin-top:6px}
+  .scroller{margin:12px 0;overflow:visible;border:0;border-radius:0}
+  table.data{min-width:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  table.data th,table.data td{padding:7px 11px}
+  .meta th,.meta td{padding:7px 0}
+  .tech dt,.tech dd{padding:8px 0}
+  .proj{margin-top:26px;padding-top:22px}
+  footer{padding:20px 0 0}
+  a{color:#25436f;text-decoration:none}
 }
 </style>
 </head>
