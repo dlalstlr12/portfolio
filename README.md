@@ -2,7 +2,7 @@
 
 정적 HTML 한 장으로 만든 포트폴리오 페이지입니다. 빌드 단계 없이 `index.html` 하나만 서빙합니다.
 
-**Live** — https://portfolio-tau-tawny-ycw9588fg9.vercel.app
+**Live** — https://minsik-portfolio.vercel.app
 
 ## 구성
 
