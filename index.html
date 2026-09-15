@@ -381,19 +381,23 @@ footer a{color:var(--ink-2)}
         상세 문서는 저장소 <code>docs/</code> (로드맵 · 트러블슈팅 · 성능 측정 · 배포 기록)
         <br><span class="hint">데모는 무료 티어라 첫 접속 시 기동에 3~5분이 걸립니다 (기동 중에는 안내와 경과 시간이 표시됩니다)</span>
         <br><span class="hint">아래 수치들은 전부 클릭해서 원본 측정 로그·검증 코드로 바로 이동할 수 있습니다 —
-          종합본은 <a href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/performance.md" target="_blank" rel="noopener">docs/performance.md</a></span>
+          종합본은 <a href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/performance.md" target="_blank" rel="noopener">docs/performance.md</a>,
+          raw 터미널 출력은 <a href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/deploy/loadtest-local/README.md" target="_blank" rel="noopener">loadtest-local/</a>
+          (다시 돌려보니 오버부킹 10→1건으로 달라졌는데, 왜 달라졌는지까지 그 문서에 그대로 적어뒀습니다)</span>
       </td></tr>
     </table>
 
     <div class="stats">
       <div class="stat"><b>10건 → 1건</b><span>동시 예약 오버부킹<br>(락 전략 적용 후)</span>
-        <a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/performance.md#L20-L36" target="_blank" rel="noopener">실측 로그</a></div>
+        <a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/performance.md#L20-L36" target="_blank" rel="noopener">실측 로그</a>
+        <a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/deploy/loadtest-local/README.md" target="_blank" rel="noopener">raw 재실행(2026-09-15)</a></div>
       <div class="stat"><b>408 → 1,837</b><span>룸 조회 처리량 req/s<br>(캐시 적용 후 4.5배)</span>
-        <a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/performance.md#L49-L58" target="_blank" rel="noopener">실측 로그</a></div>
+        <a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/performance.md#L49-L58" target="_blank" rel="noopener">실측 로그</a>
+        <a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/deploy/loadtest-local/room-read-redis.txt" target="_blank" rel="noopener">raw 로그</a></div>
       <div class="stat"><b>~27 ms</b><span>공지 발행 p95<br>(팬아웃 규모와 무관)</span>
         <a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/performance.md#L79-L90" target="_blank" rel="noopener">실측 로그</a></div>
       <div class="stat"><b>0.79 %</b><span>알림 최종 실패율<br>(이론값 0.3⁴ ≈ 0.81%)</span>
-        <a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/blob/main/backend/load-test/notification-announce.js" target="_blank" rel="noopener">부하 스크립트</a></div>
+        <a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/deploy/loadtest-local/notification-announce.txt" target="_blank" rel="noopener">raw 로그 (15,903건 드레인, 0.70%)</a></div>
     </div>
 
     <h3>아키텍처</h3>
@@ -488,7 +492,8 @@ footer a{color:var(--ink-2)}
       <p class="table-proof">→ 검증 코드:
         <a href="https://github.com/dlalstlr12/study-room-reservation/tree/main/backend/src/test/java/com/studyroom/reservation/concurrency" target="_blank" rel="noopener">reservation/concurrency/</a>
         (락 없음·비관적 락·분산 락 세 전략 각각의 동시성 테스트, 매 push마다 CI에서 재실행) ·
-        부하 스크립트 <a href="https://github.com/dlalstlr12/study-room-reservation/blob/main/backend/load-test/reservation-conflict.js" target="_blank" rel="noopener">reservation-conflict.js</a></p>
+        부하 스크립트 <a href="https://github.com/dlalstlr12/study-room-reservation/blob/main/backend/load-test/reservation-conflict.js" target="_blank" rel="noopener">reservation-conflict.js</a> ·
+        raw 로그 <a href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/deploy/loadtest-local/reservation-none.txt" target="_blank" rel="noopener">reservation-none.txt</a></p>
 
       <h4>판단</h4>
       <p>비관적 락은 정합성을 얻는 대신 처리량 <strong>−56%</strong>, 분산 락은 단일 핫키 기준 <strong>−83%</strong>
@@ -521,7 +526,9 @@ footer a{color:var(--ink-2)}
       </ul>
       <p class="table-proof">→ 재시도·DLT 설정:
         <a href="https://github.com/dlalstlr12/study-room-reservation/blob/main/backend/src/main/java/com/studyroom/notification/NotificationConsumer.java" target="_blank" rel="noopener">NotificationConsumer.java</a> ·
-        부하 스크립트 <a href="https://github.com/dlalstlr12/study-room-reservation/blob/main/backend/load-test/notification-announce.js" target="_blank" rel="noopener">notification-announce.js</a></p>
+        부하 스크립트 <a href="https://github.com/dlalstlr12/study-room-reservation/blob/main/backend/load-test/notification-announce.js" target="_blank" rel="noopener">notification-announce.js</a> ·
+        raw 로그 <a href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/deploy/loadtest-local/notification-announce.txt" target="_blank" rel="noopener">notification-announce.txt</a>
+        (15,903건 완전 드레인 후 실패율 0.70%)</p>
     </div>
 
     <!-- ── 문제해결 3 ─────────────────────────────────── -->
@@ -566,7 +573,7 @@ footer a{color:var(--ink-2)}
             <td>Redis TTL 홀딩(10분) + keyspace 만료 이벤트 + <strong>스케줄러 백스톱</strong> —
               만료 이벤트는 전달이 보장되지 않으므로 이중 안전장치</td>
             <td class="n">408 → 1,837 req/s<br>p95 81 → 36 ms</td>
-            <td><a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/performance.md#L49-L58" target="_blank" rel="noopener">실측 로그</a><br>
+            <td><a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/deploy/loadtest-local/room-read-redis.txt" target="_blank" rel="noopener">raw 로그</a><br>
               <a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/blob/main/backend/src/test/java/com/studyroom/reservation/hold/HoldExpiryTest.java" target="_blank" rel="noopener">HoldExpiryTest</a></td>
           </tr>
           <tr>
