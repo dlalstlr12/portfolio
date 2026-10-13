@@ -340,13 +340,17 @@ footer a{color:var(--ink-2)}
       <dd>Java 17, Spring Boot 3, Spring Security(JWT), Spring Data JPA / Hibernate,
         Spring Batch, MySQL, Redis(Redisson), Apache Kafka</dd>
       <dt>테스트 · 측정</dt>
-      <dd>JUnit 5, Mockito, Testcontainers, k6</dd>
+      <dd>JUnit 5, Mockito, Testcontainers(MySQL · Redis · Kafka), k6</dd>
+      <dt>API · 문서화</dt>
+      <dd>REST API 설계, Swagger(springdoc-openapi), Postman · DBDiagram</dd>
+      <dt>외부 API 연동</dt>
+      <dd>기상청 단기예보(공공데이터포털 · API 허브), 카카오 지도 SDK</dd>
       <dt>인프라 · 배포</dt>
       <dd>Docker / Docker Compose, GitHub Actions, Nginx, AWS EC2, Render, Vercel, Flyway</dd>
       <dt>실시간</dt>
-      <dd>WebSocket / STOMP, Socket.IO, WebRTC</dd>
+      <dd>WebSocket / STOMP, SSE, Socket.IO, WebRTC</dd>
       <dt>사용 경험</dt>
-      <dd>Node.js (Express, Nest.js), TypeScript, React, MongoDB, MariaDB</dd>
+      <dd>Node.js (Express, Nest.js), TypeScript, React, Next.js, MongoDB, MariaDB, PostgreSQL</dd>
       <dt>협업</dt>
       <dd>Git / GitHub (GitHub Flow · PR 리뷰), Notion, Postman</dd>
     </dl>
@@ -369,9 +373,9 @@ footer a{color:var(--ink-2)}
       <tr><th>개발 기간</th><td>2026.08 ~ 2026.09</td></tr>
       <tr><th>개발 인원</th><td>1인 — 기획 · 설계 · 구현 · 테스트 · 배포 전담</td></tr>
       <tr><th>사용 기술</th><td>Java 17, Spring Boot 3.3, Spring Security(JWT), Spring Data JPA, Spring Batch ·
-        MySQL, Redis(Redisson), Apache Kafka, Flyway · WebSocket(STOMP), Testcontainers, k6 ·
+        MySQL, Redis(Redisson), Apache Kafka, Flyway · WebSocket(STOMP), Testcontainers, k6, Swagger(springdoc-openapi) ·
         Docker Compose, GitHub Actions, AWS EC2, Render · Vercel</td></tr>
-      <tr><th>규모</th><td>10단계 로드맵 · 커밋 125개 · 머지된 PR 26건 · CI 전 단계 통과
+      <tr><th>규모</th><td>10단계 로드맵 · 커밋 129개 · 머지된 PR 27건 · 테스트 클래스 40개(메서드 98개) · CI 전 단계 통과
         <a href="https://github.com/dlalstlr12/study-room-reservation/actions/workflows/ci.yml" target="_blank" rel="noopener">
           <img class="ci-badge" src="https://github.com/dlalstlr12/study-room-reservation/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
       </td></tr>
@@ -637,7 +641,7 @@ footer a{color:var(--ink-2)}
     <div class="proj">
       <div class="proj-head">
         <h3>오늘 날씨 어때?</h3>
-        <span class="badge">1인 · 2025.10 ~ 11</span>
+        <span class="badge">1인 · 2025.10 ~ 2026.04</span>
       </div>
       <table class="meta">
         <tr><th>사용 기술</th><td>Spring Boot 3 (Java 17), Spring Security(JWT), JPA, Flyway, MySQL ·
@@ -645,7 +649,8 @@ footer a{color:var(--ink-2)}
         <tr><th>링크</th><td><a href="https://github.com/dlalstlr12/weather-wep" target="_blank" rel="noopener">github.com/dlalstlr12/weather-wep</a></td></tr>
       </table>
       <ul>
-        <li>기상청(KMA) 오픈 API 연동 설계 + 카카오 지도 SDK를 이용한 위치 기반 날씨 조회</li>
+        <li><strong>기상청 단기예보·초단기실황 API 연동</strong> — 위경도를 기상청 격자 좌표로 변환하고 발표시각(02·05·…·23시) 기준으로 호출 시점을 계산, 응답을 시간대·항목별로 재구성하고 같은 격자·발표시각 요청은 10분 캐시, HTTP 오류·결과 코드·파싱 실패는 예외로 처리. 카카오 지도 SDK로 위치 기반 조회</li>
+        <li><strong>날씨 챗</strong> — 질문에서 도시·시점을 읽어 날씨 정보를 답하는 챗(SSE 스트리밍). 로컬 소형 LLM(Ollama)을 붙여 자유 대화까지 시도했지만 모델 한계로 품질이 부족해, 날씨 질문은 데이터 조회로 답하는 방식을 중심으로 남겼습니다</li>
         <li><strong>Flyway로 스키마 버전을 관리</strong>하고 JWT 인증을 붙였으며, Docker Compose로 로컬 환경을
           구성한 뒤 PaaS 3곳(프론트 / 백엔드 / DB)에 분리 배포</li>
         <li>스터디룸 프로젝트에서 쓴 <strong>Spring Boot 3 · JWT · Flyway · 컨테이너 기반 배포 파이프라인의
@@ -660,7 +665,7 @@ footer a{color:var(--ink-2)}
       </div>
       <table class="meta">
         <tr><th>담당</th><td>백엔드 — 인증 · 실시간 통신</td></tr>
-        <tr><th>사용 기술</th><td>Node.js, Socket.IO, WebRTC, HTML, CSS</td></tr>
+        <tr><th>사용 기술</th><td>Node.js, Express, express-session, MySQL, Socket.IO, WebRTC, HTML, CSS</td></tr>
         <tr><th>링크</th><td><a href="https://github.com/dlalstlr12/RealTM" target="_blank" rel="noopener">github.com/dlalstlr12/RealTM</a></td></tr>
       </table>
       <ul>
@@ -678,6 +683,12 @@ footer a{color:var(--ink-2)}
         <thead><tr><th>프로젝트</th><th>기간</th><th>내용</th><th>기술</th></tr></thead>
         <tbody>
           <tr>
+            <td><a href="https://github.com/dlalstlr12/reddit-example" target="_blank" rel="noopener">Next.js CRUD</a></td>
+            <td class="n">2023.09</td>
+            <td>Reddit 모티브 커뮤니티 — 쿠키+JWT 인증, 서브 · 포스트 · 댓글 · 투표 CRUD</td>
+            <td>Next.js 13, TypeScript, Tailwind, SWR, Express, TypeORM, PostgreSQL, Docker Compose</td>
+          </tr>
+          <tr>
             <td><a href="https://github.com/dlalstlr12/Book-shopping-mall" target="_blank" rel="noopener">도서구매 쇼핑몰 API</a></td>
             <td class="n">2024.01~02</td>
             <td>사용자 인증 · 도서 검색 · 주문/결제 REST API 설계, Postman·DBDiagram 기반 API 문서화</td>
@@ -686,12 +697,12 @@ footer a{color:var(--ink-2)}
           <tr>
             <td><a href="https://github.com/dlalstlr12/nestProject" target="_blank" rel="noopener">Nest.js 프로젝트</a></td>
             <td class="n">2024.05~06</td>
-            <td>OAuth 회원가입 인증 흐름 설계·구현, WebSocket 실시간 채팅방</td>
+            <td>Google OAuth(passport) 회원가입 인증 흐름 설계·구현, WebSocket 실시간 채팅방</td>
             <td>Nest.js, Socket.IO</td>
           </tr>
           <tr>
             <td><a href="https://github.com/dlalstlr12/CRUD-Project-with-Spring-Boot" target="_blank" rel="noopener">CRUD 게시판</a></td>
-            <td class="n">2024.10</td>
+            <td class="n">2024.10~11</td>
             <td>JPA 게시물 CRUD · 페이징 · 검색 · 파일 업로드</td>
             <td>Java, Spring Boot, JPA, MariaDB, Thymeleaf</td>
           </tr>
