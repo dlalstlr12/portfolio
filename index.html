@@ -346,7 +346,7 @@ footer a{color:var(--ink-2)}
       <dt>외부 API 연동</dt>
       <dd>기상청 단기예보(공공데이터포털 · API 허브), 카카오 지도 SDK</dd>
       <dt>인프라 · 배포</dt>
-      <dd>Docker / Docker Compose, GitHub Actions, Nginx, AWS EC2, Render, Vercel, Flyway</dd>
+      <dd>Docker / Docker Compose, GitHub Actions, Jenkins, Nginx, AWS EC2, Render, Vercel, Flyway</dd>
       <dt>실시간</dt>
       <dd>WebSocket / STOMP, SSE, Socket.IO, WebRTC</dd>
       <dt>사용 경험</dt>
@@ -645,7 +645,7 @@ footer a{color:var(--ink-2)}
       </div>
       <table class="meta">
         <tr><th>사용 기술</th><td>Spring Boot 3 (Java 17), Spring Security(JWT), JPA, Flyway, MySQL ·
-          TypeScript · Docker Compose · Cloudflare Pages · Render · Railway</td></tr>
+          TypeScript · Docker Compose · Jenkins · Cloudflare Pages · Render · Railway</td></tr>
         <tr><th>링크</th><td><a href="https://github.com/dlalstlr12/weather-wep" target="_blank" rel="noopener">github.com/dlalstlr12/weather-wep</a></td></tr>
       </table>
       <ul>
@@ -653,6 +653,7 @@ footer a{color:var(--ink-2)}
         <li><strong>날씨 챗</strong> — 질문에서 도시·시점을 읽어 날씨 정보를 답하는 챗(SSE 스트리밍). 로컬 소형 LLM(Ollama)을 붙여 자유 대화까지 시도했지만 모델 한계로 품질이 부족해, 날씨 질문은 데이터 조회로 답하는 방식을 중심으로 남겼습니다</li>
         <li><strong>Flyway로 스키마 버전을 관리</strong>하고 JWT 인증을 붙였으며, Docker Compose로 로컬 환경을
           구성한 뒤 PaaS 3곳(프론트 / 백엔드 / DB)에 분리 배포</li>
+        <li>로컬 <strong>Jenkins</strong>에 Docker 이미지 빌드·푸시 파이프라인(Jenkinsfile)을 구성해 21회 실행하고, 실패를 고쳐가며 Docker Hub에 이미지를 올렸습니다</li>
         <li>스터디룸 프로젝트에서 쓴 <strong>Spring Boot 3 · JWT · Flyway · 컨테이너 기반 배포 파이프라인의
           밑바탕</strong>이 된 프로젝트입니다</li>
       </ul>
