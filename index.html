@@ -338,15 +338,15 @@ footer a{color:var(--ink-2)}
     <dl class="tech">
       <dt>주력</dt>
       <dd>Java 17, Spring Boot 3, Spring Security(JWT), Spring Data JPA / Hibernate,
-        Spring Batch, MySQL, Redis(Redisson), Apache Kafka</dd>
+        Spring Batch, MySQL, PostgreSQL / PostGIS, Redis(Redisson), Apache Kafka</dd>
       <dt>테스트 · 측정</dt>
-      <dd>JUnit 5, Mockito, Testcontainers(MySQL · Redis · Kafka), k6</dd>
+      <dd>JUnit 5, Mockito, Testcontainers(MySQL · Redis · Kafka · PostGIS), WireMock, JaCoCo, k6</dd>
       <dt>API · 문서화</dt>
       <dd>REST API 설계, Swagger(springdoc-openapi), Postman · DBDiagram</dd>
       <dt>외부 API 연동</dt>
-      <dd>기상청 단기예보(공공데이터포털 · API 허브), 카카오 지도 SDK</dd>
+      <dd>기상청 단기예보(공공데이터포털 · API 허브), 카카오 지도 SDK, Anthropic API(Claude 도구 호출 · SSE 스트리밍), Resilience4j(재시도 · 서킷 브레이커), Caffeine</dd>
       <dt>인프라 · 배포</dt>
-      <dd>Docker / Docker Compose, GitHub Actions, Jenkins, Nginx, AWS EC2, Render, Vercel, Flyway</dd>
+      <dd>Docker / Docker Compose, GitHub Actions, Jenkins, Prometheus · Grafana(Micrometer), Nginx, AWS EC2, Render, Railway, Vercel, Cloudflare Pages, Flyway</dd>
       <dt>실시간</dt>
       <dd>WebSocket / STOMP, SSE, Socket.IO, WebRTC</dd>
       <dt>사용 경험</dt>
@@ -641,21 +641,23 @@ footer a{color:var(--ink-2)}
     <div class="proj">
       <div class="proj-head">
         <h3>오늘 날씨 어때?</h3>
-        <span class="badge">1인 · 2025.10 ~ 2026.04</span>
+        <span class="badge">1인 · 2025.10 ~ 2026.04 · 2026.10 리팩토링</span>
       </div>
       <table class="meta">
-        <tr><th>사용 기술</th><td>Spring Boot 3 (Java 17), Spring Security(JWT), JPA, Flyway, MySQL ·
-          TypeScript · Docker Compose · Jenkins · Cloudflare Pages · Render · Railway</td></tr>
-        <tr><th>링크</th><td><a href="https://github.com/dlalstlr12/weather-wep" target="_blank" rel="noopener">github.com/dlalstlr12/weather-wep</a></td></tr>
+        <tr><th>사용 기술</th><td>Spring Boot 3 (Java 17), Spring Security(JWT), JPA, Flyway, PostgreSQL + PostGIS,
+          Resilience4j, Caffeine, Micrometer · Prometheus · Grafana · Claude(Anthropic API) ·
+          React, TypeScript · Docker Compose, GitHub Actions · Cloudflare Pages · Render · Railway</td></tr>
+        <tr><th>링크</th><td><a href="https://github.com/dlalstlr12/weather-wep" target="_blank" rel="noopener">github.com/dlalstlr12/weather-wep</a> (README와 docs/에 설계 · 측정 · 한계 기록)</td></tr>
       </table>
       <ul>
-        <li><strong>기상청 단기예보·초단기실황 API 연동</strong> — 위경도를 기상청 격자 좌표로 변환하고 발표시각(02·05·…·23시) 기준으로 호출 시점을 계산, 응답을 시간대·항목별로 재구성하고 같은 격자·발표시각 요청은 10분 캐시, HTTP 오류·결과 코드·파싱 실패는 예외로 처리. 카카오 지도 SDK로 위치 기반 조회</li>
-        <li><strong>날씨 챗</strong> — 질문에서 도시·시점을 읽어 날씨 정보를 답하는 챗(SSE 스트리밍). 로컬 소형 LLM(Ollama)을 붙여 자유 대화까지 시도했지만 모델 한계로 품질이 부족해, 날씨 질문은 데이터 조회로 답하는 방식을 중심으로 남겼습니다</li>
-        <li><strong>Flyway로 스키마 버전을 관리</strong>하고 JWT 인증을 붙였으며, Docker Compose로 로컬 환경을
-          구성한 뒤 PaaS 3곳(프론트 / 백엔드 / DB)에 분리 배포</li>
-        <li>로컬 <strong>Jenkins</strong>에 Docker 이미지 빌드·푸시 파이프라인(Jenkinsfile)을 구성해 21회 실행하고, 실패를 고쳐가며 Docker Hub에 이미지를 올렸습니다</li>
-        <li>스터디룸 프로젝트에서 쓴 <strong>Spring Boot 3 · JWT · Flyway · 컨테이너 기반 배포 파이프라인의
-          밑바탕</strong>이 된 프로젝트입니다</li>
+        <li><strong>외부 API 장애 대응</strong> — 기상청 호출에 타임아웃 · 재시도 · 서킷 브레이커 · 캐시(같은 키 동시 요청 합치기, 실패 시 지난 값 응답)를 적용하고 WireMock 장애 주입과 k6로 전후를 측정했습니다. 응답이 5초 지연될 때 날씨와 무관한 요청의 지연 중앙값 4.5초 → 2ms, 같은 키 동시 50요청의 기상청 호출 50회 → 1회 (로컬 1대, 기상청 대역, 2회 반복)</li>
+        <li><strong>PostGIS 위치 검색</strong> — 기상청 행정구역 3,836곳을 적재해 이름 · 반경 · 최근접 검색을 구현하고, 공간 인덱스로 반경 5km 검색 5.31ms → 0.245ms(서울)를 확인했습니다 (EXPLAIN ANALYZE, 실데이터, 로컬). 처음 측정에 세션 초기화 비용이 섞여 폐기하고 다시 쟀습니다</li>
+        <li><strong>Claude 도구 호출 챗</strong> — 위치 검색 · 현재 · 예보 도구를 호출해 답하는 챗을 구현하고 SSE 스트리밍(도구 조회 상태 + 답변 조각), 멀티턴, 호출 횟수 · 토큰 · 일일 사용량 상한, LLM을 못 쓸 때 규칙 기반 답변으로 대체. 질문당 약 $0.0003 (토큰 × 모델 단가 계산)</li>
+        <li><strong>챗 평가</strong> — 50문항 평가셋(훈련 35 / 시험 15)과 코드 채점기로 처음 보는 15문항 평균 84.4%(3회)를 확인했고, 평가가 찾아낸 모델의 날짜 환각(오늘 날짜를 몰라 틀린 날짜를 지어냄)을 프롬프트와 검색 개선으로 고쳤습니다 (가짜 날씨 데이터, 로컬, 시험셋은 개선 뒤 미공개 아님)</li>
+        <li><strong>관측성 · 테스트 · CI</strong> — Micrometer · Prometheus · Grafana 대시보드(16패널)로 외부 API 지연, 캐시, 서킷 브레이커, LLM 토큰을 측정하고 장애 주입으로 측정값이 실제 동작과 일치함을 검증했습니다. Testcontainers 통합 테스트를 포함해 테스트 192개, JaCoCo 줄 커버리지 91%, GitHub Actions CI</li>
+        <li>무료 호스팅이 잠든 서버를 깨우는 동안 &ldquo;오류&rdquo;만 보이던 문제를 서버 상태 확인 API와 화면 안내(깨우는 중, 준비되면 자동 전환)로 해결했습니다</li>
+        <li>원래 구현(2025.10~2026.04): 기상청 단기예보 · 초단기실황 API 연동(격자 변환, 발표시각 기준 호출), 카카오 지도 SDK, JWT, Flyway, 로컬 <strong>Jenkins</strong> 파이프라인 21회 실행(Docker Hub 푸시)</li>
+        <li>위 수치는 모두 로컬 PC 한 대에서 기상청 대역(WireMock) 또는 가짜 날씨 데이터로 잰 값이며 운영 환경의 값이 아닙니다. 운영(Render)에는 Prometheus가 없고, 무료 티어라 서버가 잠들면 깨어나는 데 시간이 걸립니다</li>
       </ul>
     </div>
 
