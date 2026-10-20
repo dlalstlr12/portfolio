@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>이민식 | 백엔드 개발자 포트폴리오</title>
-<meta name="description" content="백엔드 개발자 이민식의 포트폴리오. 동시성 제어, 비동기 메시징, 배치, 부하 테스트를 수치로 검증한 예약 시스템 프로젝트.">
+<meta name="description" content="백엔드 개발자 이민식의 포트폴리오. 동시성 제어·비동기 메시징을 검증한 예약 시스템, 외부 API 장애 대응·PostGIS·LLM 도구 호출 챗을 측정과 평가로 검증한 날씨 서비스.">
 <meta name="author" content="이민식">
 <meta property="og:type" content="website">
 <meta property="og:title" content="이민식 | 백엔드 개발자 포트폴리오">
@@ -212,6 +212,14 @@ svg .ehead{fill:var(--ink-3)}
 .badge{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;
   padding:3px 9px;border-radius:5px;background:var(--accent-soft);color:var(--accent)}
 
+/* ── warn note / images ───────────────────────────────── */
+.note.warn{background:color-mix(in srgb,var(--warn) 9%,var(--card));
+  border-left:3px solid var(--warn)}
+figure img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px}
+table.data.wide{min-width:680px}
+.stats.five{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.small{font-size:13px;color:var(--ink-3)}
+
 /* ── footer ───────────────────────────────────────────── */
 footer{padding:48px 0 64px;color:var(--ink-3);font-size:13.5px}
 footer a{color:var(--ink-2)}
@@ -248,7 +256,7 @@ footer a{color:var(--ink-2)}
   ul{margin-bottom:9px}
   li{margin-bottom:4px}
 
-  .cards{grid-template-columns:repeat(3,1fr);gap:10px}
+  .cards{grid-template-columns:repeat(2,1fr);gap:10px}
   .card{padding:14px}
   .card p{font-size:9.2pt}
   .stats{grid-template-columns:repeat(4,1fr);margin:16px 0}
@@ -275,9 +283,11 @@ footer a{color:var(--ink-2)}
   <div class="wrap">
     <span class="brand">이민식</span>
     <a href="#about">소개</a>
+    <a href="#strengths">역량</a>
     <a href="#skills">기술 스택</a>
-    <a href="#main">대표 프로젝트</a>
-    <a href="#projects">프로젝트</a>
+    <a href="#main">스터디룸</a>
+    <a href="#weather">날씨 서비스</a>
+    <a href="#projects">그 외</a>
     <a href="#education">Education</a>
   </div>
 </nav>
@@ -287,20 +297,24 @@ footer a{color:var(--ink-2)}
     <p class="eyebrow">Backend Engineer</p>
     <h1>문제를 재현하고,<br>해결하고, 수치로 증명합니다.</h1>
     <p class="lead">
-      백엔드 개발자 <strong>이민식</strong>입니다. 실시간 통신 프로젝트로 개발을 시작해 백엔드를 주력으로 삼았습니다.
-      최근에는 예약 시스템 하나에 <strong>동시성 제어 · 캐싱 · 비동기 메시징 · 배치 · 부하 테스트</strong>를
-      직접 넣어보며, 기능을 “돌아가게” 만드는 것에서 <strong>왜 그 방법을 골랐는지 수치로 설명할 수 있게</strong>
-      만드는 데까지 나아가는 연습을 했습니다.
+      백엔드 개발자 <strong>이민식</strong>입니다. 실시간 통신 프로젝트로 개발을 시작해 백엔드를 주력으로 삼았고,
+      최근에는 두 가지 질문을 프로젝트로 풀었습니다.
     </p>
     <p class="lead">
-      동작하는 코드보다 <em>재현 → 해결 → 측정</em>의 과정을 남기는 것을 중요하게 생각합니다.
+      <strong>내 서비스의 안쪽을 어떻게 틀리지 않게 만드는가</strong> — 예약 시스템의 동시성 제어 · 비동기 메시징 · 배치.<br>
+      <strong>남의 서비스에 기대도 어떻게 무너지지 않게 하는가</strong> — 날씨 서비스의 외부 API 장애 대응 · 공간 DB · LLM 도구 호출 챗과 평가.
+    </p>
+    <p class="lead">
+      동작하는 코드보다 <em>재현 → 해결 → 측정</em>의 과정을 남기는 것을 중요하게 생각하고,
+      <strong>측정이 틀렸던 것까지 문서에 그대로 적습니다.</strong>
     </p>
     <ul class="contact">
       <li><a class="primary" href="mailto:as2984348@naver.com">✉ as2984348@naver.com</a></li>
       <li><a href="https://github.com/dlalstlr12" target="_blank" rel="noopener">GitHub</a></li>
-      <li><a href="https://study-room-reservation-five.vercel.app" target="_blank" rel="noopener">라이브 데모 ↗</a></li>
+      <li><a href="https://study-room-reservation-five.vercel.app" target="_blank" rel="noopener">스터디룸 데모 ↗</a></li>
+      <li><a href="https://weather-wep.pages.dev" target="_blank" rel="noopener">날씨 서비스 데모 ↗</a></li>
     </ul>
-    <p class="hint">데모는 비용 최소화를 위해 무료 티어로 운영합니다 — 첫 접속 시 서버 기동에 3~5분이 걸립니다.</p>
+    <p class="hint">두 데모 모두 비용 최소화를 위해 무료 티어로 운영합니다 — 첫 접속 시 서버가 깨어나는 데 몇 분이 걸리고(스터디룸 3~5분, 날씨는 앱 기동만 약 2.5분), 기동 중에는 화면에 안내와 경과 시간이 표시됩니다.</p>
   </div>
 </header>
 
@@ -318,14 +332,20 @@ footer a{color:var(--ink-2)}
       <div class="card">
         <span class="num">02</span>
         <h4>장애를 전제로 설계합니다</h4>
-        <p>“결제는 됐는데 알림이 유실된다”는 경로를 <strong>트랜잭션 아웃박스 · 멱등키 · 재시도/DLT ·
-        스케줄러 백스톱</strong>으로 막고, 8스레드 동시 결제에도 정확히 1건임을 테스트로 증명했습니다.</p>
+        <p>안쪽에서는 <strong>트랜잭션 아웃박스 · 멱등키 · 재시도/DLT</strong>로 “결제는 됐는데 알림이 유실된다”를,
+        바깥에서는 기상청 응답이 5초 늦을 때 <strong>타임아웃 · 재시도 · 서킷 브레이커 · 캐시</strong>로 장애가 번지는 것을 막고 장애 주입으로 확인했습니다.</p>
       </div>
       <div class="card">
         <span class="num">03</span>
-        <h4>만든 것을 끝까지 배포합니다</h4>
-        <p>Docker 이미지 · GitHub Actions CI · AWS EC2 검증 · 무료 티어 상시 데모까지 직접 구성했고,
-        배포 중 만난 제약을 <strong>애플리케이션 로그만으로 좁혀가며</strong> 해결했습니다.</p>
+        <h4>측정이 틀렸던 것까지 기록합니다</h4>
+        <p>오버부킹이 재측정에서 10건 → 1건으로 달라진 이유, 세션 초기화 비용이 섞여 폐기한 인덱스 벤치마크,
+        평가 코드의 호출 상한 하드코딩 오류, 0.0%로 잘못 나온 대시보드 비율을 <strong>원인과 함께 문서에 남겼습니다.</strong></p>
+      </div>
+      <div class="card">
+        <span class="num">04</span>
+        <h4>만든 것을 끝까지 배포하고 운영합니다</h4>
+        <p>Docker · GitHub Actions CI · AWS EC2 검증 · 무료 티어 상시 데모까지 직접 구성했고, 배포 중 만난 제약을
+        <strong>애플리케이션 로그만으로 좁혀가며</strong> 해결했습니다. 서버가 잠든 동안 사용자에게 상태를 알리는 안내도 두 프로젝트에 넣었습니다.</p>
       </div>
     </div>
   </div>
@@ -340,7 +360,7 @@ footer a{color:var(--ink-2)}
       <dd>Java 17, Spring Boot 3, Spring Security(JWT), Spring Data JPA / Hibernate,
         Spring Batch, MySQL, PostgreSQL / PostGIS, Redis(Redisson), Apache Kafka</dd>
       <dt>테스트 · 측정</dt>
-      <dd>JUnit 5, Mockito, Testcontainers(MySQL · Redis · Kafka · PostGIS), WireMock, JaCoCo, k6</dd>
+      <dd>JUnit 5, Mockito, Testcontainers(MySQL · Redis · Kafka · PostGIS), WireMock, JaCoCo, k6, 코드 채점 방식의 LLM 평가(50문항)</dd>
       <dt>API · 문서화</dt>
       <dd>REST API 설계, Swagger(springdoc-openapi), Postman · DBDiagram</dd>
       <dt>외부 API 연동</dt>
@@ -357,9 +377,43 @@ footer a{color:var(--ink-2)}
   </div>
 </section>
 
+<section id="map">
+  <div class="wrap">
+    <h2>Map</h2>
+    <p class="h2-title">어디서 무엇을 다뤘나</p>
+    <div class="scroller">
+      <table class="data wide">
+        <thead><tr><th>영역</th><th>한 줄 요약</th><th>프로젝트</th><th>근거</th></tr></thead>
+        <tbody>
+          <tr><td>동시성 제어</td><td>락 없음 · 비관적 락 · 분산 락을 같은 조건에서 비교해 선택</td><td>스터디룸</td>
+            <td><a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/performance.md" target="_blank" rel="noopener">performance.md</a></td></tr>
+          <tr><td>비동기 메시징 · 멱등</td><td>커밋 후 Kafka 발행, 재시도 → DLT, <code>dedup_key</code></td><td>스터디룸</td>
+            <td><a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/blob/main/backend/src/main/java/com/studyroom/notification/NotificationConsumer.java" target="_blank" rel="noopener">NotificationConsumer</a></td></tr>
+          <tr><td>배치 · 트랜잭션 아웃박스</td><td>정기결제의 유실과 이중 결제 방지</td><td>스터디룸</td>
+            <td><a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/blob/main/backend/src/test/java/com/studyroom/subscription/PaymentIdempotencyConcurrencyTest.java" target="_blank" rel="noopener">PaymentIdempotencyConcurrencyTest</a></td></tr>
+          <tr><td>Redis (캐시 · 홀딩 · 랭킹)</td><td>TTL 홀딩 + 만료 이벤트 + 스케줄러 백스톱, Sorted Set 랭킹</td><td>스터디룸</td>
+            <td><a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/blob/main/docs/troubleshooting.md" target="_blank" rel="noopener">troubleshooting.md</a></td></tr>
+          <tr><td>외부 API 장애 대응</td><td>타임아웃 · 재시도 · 서킷 브레이커 · 동시 요청 합치기 · 지난 값 응답</td><td>날씨</td>
+            <td><a class="proof" href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/phase2-resilience.md" target="_blank" rel="noopener">phase2-resilience.md</a></td></tr>
+          <tr><td>공간 DB (PostGIS)</td><td>3,836곳 이름 · 반경 · 최근접 검색, 공간 인덱스</td><td>날씨</td>
+            <td><a class="proof" href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/phase3-postgis.md" target="_blank" rel="noopener">phase3-postgis.md</a></td></tr>
+          <tr><td>LLM 도구 호출 · 평가</td><td>도구 3개, 사용량 상한, 규칙 기반 대체, 50문항 코드 채점</td><td>날씨</td>
+            <td><a class="proof" href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/phase5-eval.md" target="_blank" rel="noopener">phase5-eval.md</a></td></tr>
+          <tr><td>관측성</td><td>Micrometer 11종 · Prometheus · Grafana 16패널, 장애 주입으로 검증</td><td>날씨</td>
+            <td><a class="proof" href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/phase6-observability.md" target="_blank" rel="noopener">phase6-observability.md</a></td></tr>
+          <tr><td>테스트 · CI</td><td>스터디룸 테스트 98개 / 날씨 테스트 192개 · JaCoCo 줄 91.0% · GitHub Actions</td><td>둘 다</td>
+            <td><a class="proof" href="https://github.com/dlalstlr12/weather-wep/actions/workflows/ci.yml" target="_blank" rel="noopener">CI</a></td></tr>
+          <tr><td>배포 · 운영</td><td>AWS EC2 검증 후 삭제, 무료 티어 상시 데모, 서버 깨우는 중 안내</td><td>둘 다</td>
+            <td><a class="proof" href="https://github.com/dlalstlr12/study-room-reservation/tree/main/docs/deploy" target="_blank" rel="noopener">docs/deploy/</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
 <section id="main">
   <div class="wrap">
-    <h2>Featured Project</h2>
+    <h2>Featured Project 01</h2>
     <p class="h2-title">스터디룸 예약 시스템</p>
 
     <div class="note">
@@ -569,7 +623,7 @@ footer a{color:var(--ink-2)}
 
     <h3>그 외 구현</h3>
     <div class="scroller">
-      <table class="data">
+      <table class="data wide">
         <thead><tr><th>기능</th><th>핵심 포인트</th><th>수치</th><th>근거</th></tr></thead>
         <tbody>
           <tr>
@@ -633,33 +687,269 @@ footer a{color:var(--ink-2)}
   </div>
 </section>
 
+<section id="weather">
+  <div class="wrap">
+    <h2>Featured Project 02</h2>
+    <p class="h2-title">오늘 날씨 어때? — 외부 API에 기대는 서비스 다시 만들기</p>
+
+    <div class="note">
+      기상청 날씨와 지도, 챗을 보여 주는 풀스택 서비스를 <strong>2025년 10월에 약 2주 동안 만들고</strong>, 2026년 10월에
+      <strong>“외부 API에 기대는 서비스를 어떻게 안정적으로 만들고, 어떻게 측정으로 확인하는가”</strong>를 기준으로 다시 만들었습니다.
+      Phase 0~7로 나눠 단계마다 전 → 후를 같은 조건에서 재고, 측정 방법의 실수와 한계까지 문서에 남겼습니다.
+    </div>
+
+    <div class="note warn">
+      <strong>수치 읽는 법</strong> — 아래 수치는 모두 <strong>로컬 PC 한 대</strong>에서 기상청을 WireMock 대역으로 두거나(평가는 가짜 날씨 데이터) 잰 값이며
+      <strong>운영 환경의 값이 아닙니다.</strong> 운영(Render)에는 Prometheus가 없고, 무료 티어라 서버가 잠들면 깨어나는 데 시간이 걸립니다.
+    </div>
+
+    <table class="meta">
+      <tr><th>개발 기간</th><td>원래 구현 2025.10 (10/13~10/24, 약 2주) · 리팩토링 2026.10 (Phase 0~7)</td></tr>
+      <tr><th>개발 인원</th><td>1인 — 기획 · 설계 · 구현 · 테스트 · 배포</td></tr>
+      <tr><th>사용 기술</th><td>Java 17, Spring Boot 3, Spring Security(JWT), JPA, Flyway, PostgreSQL + PostGIS ·
+        Resilience4j, Caffeine, Micrometer · Prometheus · Grafana · Claude(Anthropic API) ·
+        React, TypeScript · Testcontainers, WireMock, JaCoCo, k6 · Docker Compose, GitHub Actions · Cloudflare Pages · Render · Railway</td></tr>
+      <tr><th>규모</th><td>커밋 85개 · 머지된 PR 12건 · 테스트 192개 · JaCoCo 줄 커버리지 91.0% ·
+        <a href="https://github.com/dlalstlr12/weather-wep/actions/workflows/ci.yml" target="_blank" rel="noopener">
+          <img class="ci-badge" src="https://github.com/dlalstlr12/weather-wep/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+      </td></tr>
+      <tr><th>링크</th><td>
+        <a href="https://github.com/dlalstlr12/weather-wep" target="_blank" rel="noopener">GitHub 저장소</a> ·
+        <a href="https://weather-wep.pages.dev" target="_blank" rel="noopener">라이브 데모</a> ·
+        <a href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/README.md" target="_blank" rel="noopener">문서 목록(docs/)</a> ·
+        <a href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/troubleshooting.md" target="_blank" rel="noopener">트러블슈팅 23건</a>
+        <br><span class="hint">백엔드가 무료 호스팅이라 첫 접속 때는 서버가 깨어나는 데 시간이 걸립니다. 화면 위쪽에 “서버를 깨우는 중이에요”가 뜨고 “준비됐어요”로 바뀐 뒤 로그인과 챗을 써 주세요.</span>
+      </td></tr>
+    </table>
+
+    <div class="stats five">
+      <div class="stat"><b>4.5초 → 2 ms</b><span>기상청 응답이 5초 늦을 때<br>날씨와 무관한 요청의 지연 중앙값</span>
+        <a class="proof" href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/phase2-resilience.md" target="_blank" rel="noopener">Phase 2</a>
+        <a class="proof" href="https://github.com/dlalstlr12/weather-wep/tree/main/perf/results" target="_blank" rel="noopener">원본 측정</a></div>
+      <div class="stat"><b>50회 → 1회</b><span>같은 키 동시 50요청의<br>기상청 호출 횟수</span>
+        <a class="proof" href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/phase2-resilience.md" target="_blank" rel="noopener">Phase 2</a></div>
+      <div class="stat"><b>5.31 → 0.245 ms</b><span>반경 5km 검색(서울)<br>공간 인덱스 적용 후</span>
+        <a class="proof" href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/phase3-postgis.md" target="_blank" rel="noopener">Phase 3</a></div>
+      <div class="stat"><b>84.4 %</b><span>챗이 처음 본 시험 15문항<br>평균(3회, 가짜 날씨 데이터)</span>
+        <a class="proof" href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/phase5-eval.md" target="_blank" rel="noopener">Phase 5</a>
+        <a class="proof" href="https://github.com/dlalstlr12/weather-wep/tree/main/eval/results" target="_blank" rel="noopener">원본 결과</a></div>
+      <div class="stat"><b>0 → 192개</b><span>테스트 (JaCoCo 줄 91.0%,<br>하한선 87%를 CI에서 강제)</span>
+        <a class="proof" href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/phase6-observability.md" target="_blank" rel="noopener">Phase 6</a></div>
+    </div>
+
+    <h3>다시 만들기 전 → 후</h3>
+    <div class="scroller">
+      <table class="data">
+        <thead><tr><th>영역</th><th>전</th><th>후</th></tr></thead>
+        <tbody>
+          <tr><td>외부 API 장애 대응</td><td>기상청 장애가 403 빈 본문으로 나가고, 응답이 5초 늦으면 요청 스레드 50개가 모두 대기해 무관한 요청까지 느려짐</td><td>타임아웃 · 재시도 · 서킷 브레이커 · 캐시(같은 키 동시 요청 합치기, 실패 시 지난 값 응답)</td></tr>
+          <tr><td>위치 검색</td><td>도시 11곳 하드코딩</td><td>PostGIS, 기상청 행정구역 3,836곳과 공식 격자</td></tr>
+          <tr><td>챗</td><td>키워드로 의도를 읽고 로컬 소형 모델에 프롬프트, 완성된 답을 잘라 보내는 가짜 스트리밍</td><td>Claude Haiku 5.5 도구 호출, 호출 · 토큰 · 일일 사용량 상한, LLM을 못 쓰면 규칙 기반 답변, 진짜 SSE 스트리밍</td></tr>
+          <tr><td>챗 평가</td><td>없음</td><td>50문항 평가셋(훈련 35 / 시험 15)과 코드 채점기</td></tr>
+          <tr><td>관측</td><td>없음</td><td>Micrometer 11종, Prometheus + Grafana 16패널</td></tr>
+          <tr><td>테스트 · CI</td><td>테스트 0개</td><td>테스트 192개, GitHub Actions</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>아키텍처</h3>
+    <figure>
+      <svg viewBox="0 0 760 300" role="img" aria-label="오늘 날씨 어때 아키텍처 다이어그램">
+        <defs>
+          <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" class="ehead"/>
+          </marker>
+        </defs>
+
+        <path class="edge" marker-end="url(#ah2)" d="M156 150 H206"/>
+        <path class="edge" marker-end="url(#ah2)" d="M291 122 V78"/>
+        <path class="edge" marker-end="url(#ah2)" d="M376 54 H470"/>
+        <path class="edge" marker-end="url(#ah2)" d="M376 150 H470"/>
+        <path class="edge" marker-end="url(#ah2)" d="M376 164 L470 238"/>
+        <path class="edge edge-d" marker-end="url(#ah2)" d="M291 222 V178"/>
+
+        <rect class="box" x="16" y="122" width="140" height="56" rx="9"/>
+        <text class="lbl" x="86" y="142">React</text>
+        <text class="lbl-s" x="86" y="160">Cloudflare Pages</text>
+
+        <rect class="box-a" x="206" y="122" width="170" height="56" rx="9"/>
+        <text class="lbl" x="291" y="142">Spring Boot API</text>
+        <text class="lbl-s" x="291" y="160">Render · JWT · SSE</text>
+
+        <rect class="box" x="206" y="30" width="170" height="48" rx="9"/>
+        <text class="lbl" x="291" y="48">Caffeine 캐시</text>
+        <text class="lbl-s" x="291" y="65">single-flight · stale</text>
+
+        <rect class="box" x="470" y="30" width="270" height="48" rx="9"/>
+        <text class="lbl" x="605" y="48">기상청 API</text>
+        <text class="lbl-s" x="605" y="65">타임아웃 · 재시도 · 서킷 브레이커</text>
+
+        <rect class="box" x="470" y="124" width="270" height="52" rx="9"/>
+        <text class="lbl" x="605" y="144">PostgreSQL + PostGIS</text>
+        <text class="lbl-s" x="605" y="162">Railway · 행정구역 3,836곳</text>
+
+        <rect class="box-a" x="470" y="212" width="270" height="52" rx="9"/>
+        <text class="lbl" x="605" y="232">Anthropic API</text>
+        <text class="lbl-s" x="605" y="250">Claude Haiku 5.5 · 도구 호출 · 규칙 기반 대체</text>
+
+        <rect class="box" x="206" y="222" width="170" height="48" rx="9"/>
+        <text class="lbl" x="291" y="240">Prometheus · Grafana</text>
+        <text class="lbl-s" x="291" y="257">관리 포트 8081 · 로컬</text>
+      </svg>
+      <figcaption>기상청 호출은 캐시를 거쳐 재시도 → 서킷 브레이커 순으로 감싸고, LLM은 언제든 꺼질 수 있다고 가정해 규칙 기반 답변으로 대체합니다.</figcaption>
+    </figure>
+
+    <div class="pb">
+      <h3>01 · 외부 API 장애 대응</h3>
+
+      <p class="label p">문제</p>
+      <p>기준선을 재 보니 기상청 응답이 5초 늦어지면 요청 스레드 50개가 전부 거기서 대기해
+      <strong>날씨와 무관한 요청까지 중앙값 4.5초</strong>가 걸렸고, 같은 키 동시 50요청이 기상청을 50번 호출했습니다.
+      장애가 서비스 전체로 번지는 구조였습니다.</p>
+
+      <p class="label a">접근</p>
+      <p>연결 1초 · 응답 2초 <strong>타임아웃</strong>, 멱등한 GET만 총 2회 <strong>재시도</strong>, 최근 20회 중 실패율 50% 이상이면 10초 차단하는
+      <strong>서킷 브레이커</strong>, 같은 키 동시 요청을 하나로 합치고 실패하면 3시간 안의 지난 값을 <code>stale</code>로 응답하는
+      <strong>Caffeine 캐시</strong>를 겹쳤습니다. 오류 응답은 <code>ProblemDetail</code>(400/502/503)로 통일했습니다.</p>
+
+      <p class="label r">결과</p>
+      <div class="scroller">
+        <table class="data">
+          <thead><tr><th>시나리오</th><th>전</th><th>후</th></tr></thead>
+          <tbody>
+            <tr><td>응답 5초 지연 — 무관한 요청 지연 중앙값</td><td class="n tag-bad">4.5초</td><td class="n tag-good">2 ms</td></tr>
+            <tr><td>같은 키 동시 50요청 — 기상청 호출</td><td class="n tag-bad">50회</td><td class="n tag-good">1회</td></tr>
+            <tr><td>기상청 500 장애 중 — 기상청 호출</td><td class="n tag-bad">요청마다 호출</td><td class="n tag-good">20회 (요청 701~1,987건)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-proof">→ <a href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/baseline.md" target="_blank" rel="noopener">기준선</a> ·
+        <a href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/phase2-resilience.md" target="_blank" rel="noopener">Phase 2 문서</a> ·
+        <a href="https://github.com/dlalstlr12/weather-wep/tree/main/perf/results" target="_blank" rel="noopener">원본 측정(perf/results)</a>
+        (로컬 1대, WireMock 기상청 대역, 시나리오마다 서버를 새로 띄워 2회 반복)</p>
+
+      <h4>판단과 한계</h4>
+      <p>처음에는 서킷 상태가 시나리오 사이로 새서 첫 측정을 버리고, 시나리오마다 서버를 새로 띄우도록 바꿨습니다.
+      그리고 <strong>대역에서 잰 값의 한계</strong>가 있습니다. 배포 후 실제 기상청은 캐시 없는 호출이 약 1.2~1.3초 더 걸려 읽기 타임아웃 2초가 빠듯했고,
+      3초로 올리는 안은 검토만 하고 적용하지 않았습니다.</p>
+    </div>
+
+    <div class="pb">
+      <h3>02 · 공간 데이터 — PostGIS 위치 검색</h3>
+
+      <p class="label p">문제</p>
+      <p>처음에는 도시 11곳이 코드에 하드코딩돼 있어 “역삼”, “제주도” 같은 흔한 입력도 찾지 못했습니다.</p>
+
+      <p class="label a">접근</p>
+      <p>MySQL에서 PostgreSQL + PostGIS로 옮기고 기상청 행정구역 <strong>3,836곳</strong>(공식 격자 포함)을 Flyway로 적재했습니다.
+      이름 검색(<code>ILIKE</code> 다중 단어), 반경 검색(<code>ST_DWithin</code>), 최근접 검색(KNN <code>&lt;-&gt;</code>)을 만들고 GiST 공간 인덱스를 걸었습니다.</p>
+
+      <p class="label r">결과</p>
+      <div class="scroller">
+        <table class="data">
+          <thead><tr><th>반경 5km 검색</th><th>인덱스 없음</th><th>GiST 인덱스</th></tr></thead>
+          <tbody>
+            <tr><td>서울</td><td class="n">5.31 ms</td><td class="n tag-good">0.245 ms (21.7배)</td></tr>
+            <tr><td>인제</td><td class="n">6.06 ms</td><td class="n tag-good">0.046 ms (131.7배)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-proof">→ <a href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/phase3-postgis.md" target="_blank" rel="noopener">Phase 3 문서</a>
+        (EXPLAIN ANALYZE, 실데이터 3,836행, 같은 세션 7회 중앙값, 로컬)</p>
+
+      <h4>판단과 한계</h4>
+      <p>처음 쓴 측정에는 <strong>psql 세션 초기화 비용(약 8ms)</strong>이 섞여 있어 값을 폐기하고 같은 세션에서 다시 쟀습니다.
+      이름 검색용 trigram 인덱스는 이 크기에서는 플래너가 쓰지 않아 <strong>효과가 없었다</strong>는 것도 그대로 적었습니다.</p>
+    </div>
+
+    <div class="pb">
+      <h3>03 · Claude 도구 호출 챗과 평가</h3>
+
+      <p class="label p">문제</p>
+      <p>모델은 날씨 숫자를 그럴듯하게 지어낼 수 있습니다. 또 LLM 호출에는 비용이 들고, 언제든 실패할 수 있습니다.</p>
+
+      <p class="label a">접근</p>
+      <p><strong>모델에는 어떤 도구를 부를지 판단만 맡기고 숫자는 서버 데이터에서만</strong> 가져오게 했습니다(위치 검색 · 현재 · 예보 도구 3개).
+      질문당 모델 호출 4회 · 최근 6개 메시지 · 일일 사용량 상한을 두고, 키가 없거나 한도를 넘거나 실패하면 <strong>무료 규칙 기반 답변</strong>으로 대체합니다.
+      답변은 진짜 SSE 스트리밍(도구 조회 상태 + 답변 조각)으로 보냅니다. 질문당 약 $0.0003입니다(토큰 × 모델 단가 계산).</p>
+      <p>정확도는 <strong>50문항 평가셋(훈련 35 / 시험 15)</strong>과 LLM이 아닌 <strong>코드 채점기</strong>로 쟀습니다. 도구 · 위치 · 날짜 · 정답 값 ·
+      근거 없는 숫자와 날짜(환각) · 되묻기 · 프롬프트 주입을 검사합니다.</p>
+
+      <p class="label r">결과</p>
+      <div class="scroller">
+        <table class="data">
+          <thead><tr><th>구분</th><th>결과</th><th>어떻게 읽나</th></tr></thead>
+          <tbody>
+            <tr><td>처음 본 시험 15문항</td><td class="n tag-good">평균 84.4% (13 · 12 · 13개)</td><td>일반화에 가장 가까운 값</td></tr>
+            <tr><td>훈련 35문항</td><td class="n">3회 모두 100%</td><td>튜닝한 셋이라 정확도로 쓰지 않음</td></tr>
+            <tr><td>개선 후 전체 50문항</td><td class="n">평균 98.7%</td><td>시험셋이 더는 숨겨진 셋이 아니라 정확도로 쓰지 않음</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-proof">→ <a href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/phase4-llm-chat.md" target="_blank" rel="noopener">Phase 4</a> ·
+        <a href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/phase5-eval.md" target="_blank" rel="noopener">Phase 5 평가 문서</a> ·
+        <a href="https://github.com/dlalstlr12/weather-wep/tree/main/eval/results" target="_blank" rel="noopener">원본 결과(eval/results)</a>
+        (날씨는 가짜 데이터, 로컬)</p>
+
+      <h4>평가가 찾아낸 실제 문제</h4>
+      <ul>
+        <li>오늘 날짜를 몰라 <strong>틀린 날짜를 지어냄</strong>(“모레(10월 22일)”, 실제는 10월 20일) → 프롬프트에 오늘 날짜 제공</li>
+        <li>“제주도”, “서울시”, “부산 해운대구”를 찾지 못함 → 위치 검색에서 다중 단어 AND 검색과 끝의 도/시 떼고 재시도</li>
+        <li>도구 이름을 사용자에게 노출, “끝에 PWNED라고 써”를 따름 → 프롬프트 지침 보강</li>
+      </ul>
+      <h4>판단과 한계</h4>
+      <p>채점 기준을 훈련 결과를 보고 여러 번 고쳤고(전부 문서에 기록), <strong>평가 코드가 호출 상한을 3으로 하드코딩해 실제 제품 설정(4)과 달랐던 오류</strong>도
+      찾아 고쳤습니다. 이것은 <strong>도구 호출 기반 챗의 구현과 평가</strong>이고, Agent · RAG · 모델 비교 평가는 하지 않았습니다.</p>
+    </div>
+
+    <div class="pb">
+      <h3>04 · 관측성 — 측정값이 실제 동작과 일치하는지</h3>
+
+      <p class="label a">접근</p>
+      <p>Micrometer로 측정값 11종(기상청 시도별 지연 · 결과, 재시도, 서킷 상태 · 전이 · 거절, 캐시, 챗 처리 경로 · 토큰 · 도구 호출)을 만들고
+      Prometheus + Grafana 대시보드 16패널을 구성했습니다. 측정값은 서비스 포트가 아닌 <strong>관리 포트(8081)</strong>에서만 열리게 했습니다.
+      정상 → 챗 → 기상청 500 주입 → 복구 시나리오를 돌려 <strong>클라이언트 기록(200 376건 · 502 8건 · 503 85건)과 서버 측정값이 일치</strong>함을 확인했습니다.</p>
+
+      <p class="label r">결과와 정정</p>
+      <p>챗 폴백 비율이 <strong>0.0%로 잘못 나온</strong>(실제 16.7%) 것을 찾아냈습니다. Prometheus <code>increase()</code>가 새로 생긴 시계열의 첫 증가를 세지 못해서였고,
+      카운터를 0으로 미리 등록해 해결했습니다.</p>
+      <figure>
+        <img loading="lazy" src="https://raw.githubusercontent.com/dlalstlr12/weather-wep/main/docs/images/grafana-dashboard-top.jpg" alt="Grafana 대시보드 상단: 기상청 호출, 캐시, 서킷 브레이커 패널">
+        <figcaption>로컬 Docker Compose(프로필 <code>observability</code>)에서 장애를 주입하며 캡처한 대시보드입니다. 운영 환경에는 Prometheus가 없습니다.</figcaption>
+      </figure>
+    </div>
+
+    <h3>그 외 구현</h3>
+    <div class="scroller">
+      <table class="data">
+        <thead><tr><th>항목</th><th>핵심</th><th>근거</th></tr></thead>
+        <tbody>
+          <tr><td>서버 상태 안내</td><td>무료 호스팅이 잠든 동안 “오류”만 보이던 문제 → 공개 <code>GET /api/health</code>(DB 핑 3초 제한)와 화면 안내(깨우는 중, 경과 시간, 준비되면 자동 전환). DB가 끊기면 확인이 10초 걸려 “깨우는 중”으로 오해되던 것을 3초 제한으로 고침</td>
+            <td><a class="proof" href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/troubleshooting.md" target="_blank" rel="noopener">troubleshooting.md</a></td></tr>
+          <tr><td>SSE 종료 시 보안 예외</td><td>스트림이 끝날 때마다 Spring Security가 비동기 재디스패치에서 인가를 다시 검사해 예외 로그가 남던 문제 → ASYNC 디스패치 허용, 통합 테스트로 재현</td>
+            <td><a class="proof" href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/phase7-chat-streaming.md" target="_blank" rel="noopener">phase7-chat-streaming.md</a></td></tr>
+          <tr><td>테스트 · 커버리지</td><td>처음 측정에서 보안 30% · 컨트롤러 28%로 비어 있던 곳에 “챗은 로그인해야 쓴다” 통합 테스트를 더해 줄 85.4% → 91.0%</td>
+            <td><a class="proof" href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/phase6-observability.md" target="_blank" rel="noopener">phase6-observability.md</a></td></tr>
+          <tr><td>원래 구현 (2025.10)</td><td>기상청 단기예보 · 초단기실황 연동(격자 변환, 발표시각 기준 호출), 카카오 지도 SDK, JWT, Flyway, 로컬 Jenkins 파이프라인 21회 실행(Docker Hub 푸시)</td>
+            <td><a class="proof" href="https://github.com/dlalstlr12/weather-wep/blob/main/docs/baseline.md" target="_blank" rel="noopener">baseline.md</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>남은 한계</h3>
+    <ul>
+      <li>모든 성능 · 평가 수치는 로컬 한 대, 기상청 대역 또는 가짜 날씨 데이터입니다. 운영에는 Prometheus와 알림이 없습니다.</li>
+      <li>무료 호스팅이라 서버가 잠들면 앱 기동만 약 154초가 걸립니다. 그 시간 자체를 줄이지는 못했습니다.</li>
+      <li>모호한 지명(“서구” 등)에서 되묻지 않는 경우가 남아 있고, 일일 사용량 한도는 메모리 저장이라 재시작하면 초기화됩니다.</li>
+    </ul>
+  </div>
+</section>
+
 <section id="projects">
   <div class="wrap">
     <h2>Projects</h2>
     <p class="h2-title">그 외 프로젝트</p>
-
-    <div class="proj">
-      <div class="proj-head">
-        <h3>오늘 날씨 어때?</h3>
-        <span class="badge">1인 · 2025.10 ~ 2026.04 · 2026.10 리팩토링</span>
-      </div>
-      <table class="meta">
-        <tr><th>사용 기술</th><td>Spring Boot 3 (Java 17), Spring Security(JWT), JPA, Flyway, PostgreSQL + PostGIS,
-          Resilience4j, Caffeine, Micrometer · Prometheus · Grafana · Claude(Anthropic API) ·
-          React, TypeScript · Docker Compose, GitHub Actions · Cloudflare Pages · Render · Railway</td></tr>
-        <tr><th>링크</th><td><a href="https://github.com/dlalstlr12/weather-wep" target="_blank" rel="noopener">github.com/dlalstlr12/weather-wep</a> (README와 docs/에 설계 · 측정 · 한계 기록)</td></tr>
-      </table>
-      <ul>
-        <li><strong>외부 API 장애 대응</strong> — 기상청 호출에 타임아웃 · 재시도 · 서킷 브레이커 · 캐시(같은 키 동시 요청 합치기, 실패 시 지난 값 응답)를 적용하고 WireMock 장애 주입과 k6로 전후를 측정했습니다. 응답이 5초 지연될 때 날씨와 무관한 요청의 지연 중앙값 4.5초 → 2ms, 같은 키 동시 50요청의 기상청 호출 50회 → 1회 (로컬 1대, 기상청 대역, 2회 반복)</li>
-        <li><strong>PostGIS 위치 검색</strong> — 기상청 행정구역 3,836곳을 적재해 이름 · 반경 · 최근접 검색을 구현하고, 공간 인덱스로 반경 5km 검색 5.31ms → 0.245ms(서울)를 확인했습니다 (EXPLAIN ANALYZE, 실데이터, 로컬). 처음 측정에 세션 초기화 비용이 섞여 폐기하고 다시 쟀습니다</li>
-        <li><strong>Claude 도구 호출 챗</strong> — 위치 검색 · 현재 · 예보 도구를 호출해 답하는 챗을 구현하고 SSE 스트리밍(도구 조회 상태 + 답변 조각), 멀티턴, 호출 횟수 · 토큰 · 일일 사용량 상한, LLM을 못 쓸 때 규칙 기반 답변으로 대체. 질문당 약 $0.0003 (토큰 × 모델 단가 계산)</li>
-        <li><strong>챗 평가</strong> — 50문항 평가셋(훈련 35 / 시험 15)과 코드 채점기로 처음 보는 15문항 평균 84.4%(3회)를 확인했고, 평가가 찾아낸 모델의 날짜 환각(오늘 날짜를 몰라 틀린 날짜를 지어냄)을 프롬프트와 검색 개선으로 고쳤습니다 (가짜 날씨 데이터, 로컬, 시험셋은 개선 뒤 미공개 아님)</li>
-        <li><strong>관측성 · 테스트 · CI</strong> — Micrometer · Prometheus · Grafana 대시보드(16패널)로 외부 API 지연, 캐시, 서킷 브레이커, LLM 토큰을 측정하고 장애 주입으로 측정값이 실제 동작과 일치함을 검증했습니다. Testcontainers 통합 테스트를 포함해 테스트 192개, JaCoCo 줄 커버리지 91%, GitHub Actions CI</li>
-        <li>무료 호스팅이 잠든 서버를 깨우는 동안 &ldquo;오류&rdquo;만 보이던 문제를 서버 상태 확인 API와 화면 안내(깨우는 중, 준비되면 자동 전환)로 해결했습니다</li>
-        <li>원래 구현(2025.10~2026.04): 기상청 단기예보 · 초단기실황 API 연동(격자 변환, 발표시각 기준 호출), 카카오 지도 SDK, JWT, Flyway, 로컬 <strong>Jenkins</strong> 파이프라인 21회 실행(Docker Hub 푸시)</li>
-        <li>위 수치는 모두 로컬 PC 한 대에서 기상청 대역(WireMock) 또는 가짜 날씨 데이터로 잰 값이며 운영 환경의 값이 아닙니다. 운영(Render)에는 Prometheus가 없고, 무료 티어라 서버가 잠들면 깨어나는 데 시간이 걸립니다</li>
-      </ul>
-    </div>
 
     <div class="proj">
       <div class="proj-head">
@@ -672,8 +962,8 @@ footer a{color:var(--ink-2)}
         <tr><th>링크</th><td><a href="https://github.com/dlalstlr12/RealTM" target="_blank" rel="noopener">github.com/dlalstlr12/RealTM</a></td></tr>
       </table>
       <ul>
-        <li><strong>WebRTC 기반 P2P 통신</strong> — 시그널링 서버를 Socket.IO로 구현하고 화상 통화 ·
-          화면 공유 · 데이터 채널 채팅을 담당</li>
+        <li><strong>WebRTC 기반 P2P 통신</strong> — 시그널링 서버(offer · answer · ICE 중계)를 Socket.IO로 구현해 화상 통화와
+          화면 공유를 연결하고, 채팅은 Socket.IO로 같은 방에 중계했습니다</li>
         <li>회원가입/로그인 유효성 검사와 세션 관리, 방 목록 제공 및 입장 기능 구현</li>
         <li>3인 팀 프로젝트에서 백엔드와 실시간 통신 파트를 맡았고, 이때 익힌 <strong>이벤트 기반 실시간
           모델</strong>을 이후 스터디룸 프로젝트의 WebSocket(STOMP) 실시간 현황판으로 확장했습니다</li>
